@@ -16,7 +16,7 @@
 				<unl-input floatingLabel label="Email">
 					<input is="core-input" value="{{authUser.email}}" type="email" name="kiosk-email">
 				</unl-input>
-				<button class="button-block margin-top" ng-disabled="boardSigninForm.$invalid">Continue to messaging {{selectedUser.first_name}}</button>
+				<button class="button-block margin-top" ng-disabled="boardSigninForm.$invalid" ng-click="go('^.message', {groupId:groupId})">Continue to messaging {{selectedUser.first_name}}</button>
 			</div>
 		</form>
 	</div>

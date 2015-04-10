@@ -1,7 +1,19 @@
-<unl-panel class="well" fit>
-	<div class="content-container" horizontal layout center-justified>
-		<unl-card style="width: 520px;" class="margin">
-			<unl-progress indeterminate ng-hide="members.length > 0" class="animate-fade"></unl-progress>
-		</unl-card>
+<div horizontal layout around-justified>
+	<div four>
+		<div class="icon-header">
+			<h2 class="align-center">Message {{selectedUser.first_name}} <span class="subhead">Type your message to {{selectedUser.first_name}} below</span></h2>
+		</div>
+		<form name="boardSigninForm">
+			<unl-input floatingLabel label="Begin typing your message" class="margin-bottom">
+				<unl-autogrow-textarea>
+					<textarea name=""></textarea>
+				</unl-autogrow-textarea>
+			</unl-input>
+			<div id="message-footer" class="margin-bottom">
+			{{authUser.first_name}} {{authUser.last_name}},<br>
+			{{authUser.email}}
+			</div>
+			<button class="button-block" ng-click="sendMessage()">Send Message</button>
+		</form>
 	</div>
-</unl-panel>
+</div>

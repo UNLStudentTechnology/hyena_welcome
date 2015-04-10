@@ -8,13 +8,18 @@
  * Controller of the hyenaWelcomeApp
  */
 angular.module('hyenaWelcomeApp')
-  .controller('KioskCtrl', function ($scope, $stateParams, $rootScope, LocationService, GroupService, UserService, Notification) {
+  .controller('KioskCtrl', function ($scope, $stateParams, $rootScope, $location, LocationService, GroupService, UserService, Notification) {
     //Selected user
     $scope.selectedUser = null;
     $scope.loadingContent = false;
+    $scope.authUser = null;
     //Get and set the current group ID
   	var groupId = $stateParams.groupId;
   	$scope.groupId = $rootScope.currentGroupId = groupId;
+
+    //Make sure users are starting at the first step
+    if(angular.isUndefined($scope.selectedUser) || $scope.selectedUser === null)
+      $location.path(groupId+'/kiosk/people');
 
   	//Get the requested group by ID
     GroupService.get(groupId, 'users').then(function(response) {
@@ -41,5 +46,11 @@ angular.module('hyenaWelcomeApp')
       });
       //Hide loaders
       $scope.loadingContent = false;
+    };
+
+    $scope.sendMessage = function() {
+      Notification.show('Your message was sent successfully.', 'success');
+      $scope.selectedUser = $scope.authUser = null;
+      $location.path(groupId+'/kiosk/people');
     };
   });
