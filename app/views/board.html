@@ -1,0 +1,10 @@
+<unl-toolbar>
+	<a ng-click="go('/{{groupId}}', 'animate-slide-left')" title="Back to Boards"><unl-icon-button icon="arrow-back"></unl-icon-button></a>
+	<span flex class="align-center">{{ board.title || 'Loading' }}</span>
+	<a ng-click="go('/{{groupId}}/board/{{boardId}}/beacon/new')" ng-show="groupId" title="Create New Beacon"><unl-icon-button icon="add"></unl-icon-button></a>
+</unl-toolbar>
+<div class="content-container" flex>
+	<unl-empty-content fit ng-hide="beacons.length > 0" text="No beacons yet">
+		<span subhead>Add your first beacon by hitting <core-icon icon="add"></core-icon> above</span>
+	</unl-empty-content>
+</div>
