@@ -1,5 +1,5 @@
 <unl-toolbar>
-	<a ng-click="go('^.main', {groupId:groupId})" title="Back to Group"><unl-icon-button icon="arrow-back"></unl-icon-button></a>
+	<a ng-click="go('/{{groupId}}', 'animate-slide-left')" title="Back to Group"><unl-icon-button icon="arrow-back"></unl-icon-button></a>
 	<span flex class="align-center">{{ location.title || 'New Location'}}</span>
 </unl-toolbar>
 <div class="content-container">

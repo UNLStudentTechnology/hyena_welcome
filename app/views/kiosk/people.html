@@ -1,6 +1,6 @@
 <unl-progress indeterminate ng-hide="members.length > 0" class="animate-fade"></unl-progress>
 <unl-list-group horizontal layout wrap gutters>
-	<unl-list-item-boxed  class="animate-fade-in" style="width:20%;" flex auto user user-model="member" class="animate-fade-left" image="{{ member.profile_image }}" heading="{{ member.first_name ? member.first_name +' '+ member.last_name : member }}" image="{{asset.icon_url}}" detail="Brace 305" ng-repeat="member in members | orderBy:'last_name'" link>
-		<a ng-click="selectUser(member);go('^.signin', {groupId:groupId})" title="Select this person"><paper-ripple fit></paper-ripple></a>
+	<unl-list-item-boxed class="animate-fade-in" style="width:20%;" flex auto class="animate-fade-left" image="{{ member.profile_image }}" heading="{{ member.first_name ? member.first_name +' '+ member.last_name : member }}" image="{{asset.icon_url}}" detail="{{memberStatus[member.uni_auth] || 'Out'}}" ng-repeat="member in members | orderBy:'last_name'" link>
+		<a ng-click="selectUser(member);go('/{{groupId}}/kiosk/signin', 'animate-slide-right')" title="Select this person"><paper-ripple fit></paper-ripple></a>
 	</unl-list-item-boxed>
 </unl-list-group>

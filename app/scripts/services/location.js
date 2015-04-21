@@ -44,6 +44,12 @@ angular.module('hyenaWelcomeApp')
 	          $firebase(locationRef.child('/groups/'+groupId+'/locations')).$set(response.key(), true);
 	          return response;
 	        });
+    	},
+    	getUser: function getUser(userId) {
+    		return $firebase(locationRef.child('/users/'+userId));
+    	},
+    	getUsersByGroup: function getUsers(groupId) {
+    		return $firebase(locationRef.child('groups/'+groupId+'/users'));
     	}
     };
 
