@@ -20,6 +20,7 @@ angular.module('hyenaWelcomeApp')
         group_id: parseInt(groupId),
         title: '',
         proximity_uuid: '',
+        beacon_major: 1,
         active: 1
     };
 

@@ -1,10 +1,6 @@
-<unl-toolbar> <a ng-click="go('/{{groupId}}', 'animate-slide-left')" title="Back to Location List"><unl-icon-button icon="arrow-back"></unl-icon-button></a> <span flex class="align-center">{{ location.title || 'Loading' }}</span> </unl-toolbar> <div class="content-container"> <!-- Location Settings --> <form name="editLocationForm"> <unl-list-group> <unl-list-item-header>General</unl-list-item-header> <unl-input floatinglabel label="Title"> <input is="core-input" required type="text" name="location-title" ng-model="location.title"> </unl-input> <unl-input floatinglabel label="Proximity UUID"> <input is="core-input" required type="text" name="location-proximity_uuid" ng-model="location.proximity_uuid"> </unl-input> <!-- <unl-list-item-details heading="Title">
-				<div class="tools">
-					<input required type="text" name="location-title" ng-model="location.title">
-				</div>
-			</unl-list-item-details>
-			<unl-list-item-details heading="Proximity UUID">
-				<div class="tools">
-					<input required type="text" name="location-proximity_uuid" ng-model="location.proximity_uuid">
-				</div>
-			</unl-list-item-details> --> </unl-list-group> </form> <!-- End Location Settings --> </div>
+<unl-toolbar> <a ng-click="go('/{{groupId}}', 'animate-slide-left')" title="Back to Location List"><unl-icon-button icon="arrow-back"></unl-icon-button></a> <span flex class="align-center">{{ location.title || 'Loading' }}</span> </unl-toolbar> <div class="content-container"> <!-- Location Settings --> <form name="editLocationForm"> <unl-list-group> <unl-list-item-header>General</unl-list-item-header> <!-- <unl-input floatingLabel label="Title">
+				<input is="core-input" required type="text" name="location-title" ng-model="location.title">
+			</unl-input>
+			<unl-input floatingLabel label="Beacon Major">
+				<input is="core-input" required type="text" name="location-beacon_major" ng-model="location.beacon_major">
+			</unl-input> --> <unl-list-item-details heading="Title"> <div class="tools"> <input required type="text" name="location-title" ng-model="location.title"> </div> </unl-list-item-details> <unl-list-item-details heading="Beacon Major"> <div class="tools"> <input required type="text" name="location-beacon_major" ng-model="location.beacon_major"> </div> </unl-list-item-details> </unl-list-group> </form> <!-- End Location Settings --> </div>

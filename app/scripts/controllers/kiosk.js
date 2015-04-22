@@ -10,10 +10,15 @@
 angular.module('hyenaWelcomeApp')
   .controller('KioskCtrl', function ($scope, $stateParams, $rootScope, $location, LocationService, GroupService, UserService, EmailService, Notification) {
     //Selected user
-    $scope.processData = {};
-    $scope.processData.selectedUser = null;
-    $scope.processData.loadingContent = false;
-    $scope.processData.authUser = null;
+    var defaultData = {
+      selectedUser: null,
+      loadingContent: false,
+      kioskNuid: "",
+      authUser: null
+    };
+
+    $scope.processData = angular.copy(defaultData);
+
     //Get and set the current group ID
   	var groupId = $stateParams.groupId;
   	$scope.groupId = $rootScope.currentGroupId = groupId;
@@ -41,21 +46,24 @@ angular.module('hyenaWelcomeApp')
     };
     /**
      * Validates the NUID and returns a user object
-     * @param  string nuid
      */
-    $scope.validateAndGet = function(nuid) {
-      $scope.loadingContent = true;
-      UserService.validateAndGet(nuid).then(function(response) {
+    $scope.validateAndGet = function() {
+      $scope.processData.loadingContent = true;
+
+      UserService.validateAndGet($scope.processData.kioskNuid).then(function(response) {
+        Notification.show('Hello, '+response.first_name+'!', 'success');
         $scope.processData.authUser = response;
+        //Hide loaders
+        $scope.processData.loadingContent = false;
       }, function(error) {
         console.log(error);
         if(angular.isDefined(error.message))
           Notification.show(error.message, 'error');
         else
-          Notification.show('Sorry! There was an error.', 'error');
+          Notification.show('Sorry! Unable to find a user with that NUID.', 'error');
+        //Hide loaders
+        $scope.processData.loadingContent = false;
       });
-      //Hide loaders
-      $scope.loadingContent = false;
     };
     /**
      * Send the message to the selected user.
@@ -74,7 +82,11 @@ angular.module('hyenaWelcomeApp')
         console.log('Unable to send email', error);
       });
 
-      $scope.processData.selectedUser = $scope.processData.authUser = $scope.processData.messageToUser = null;
+      $scope.startOver();
+    };
+
+    $scope.startOver = function() {
+      $scope.processData = angular.copy(defaultData);
       $location.path(groupId+'/kiosk/people');
     };
   });

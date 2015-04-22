@@ -3,21 +3,21 @@
 		<div class="icon-header">
 			<h2 class="align-center">Sign In <span class="subhead">Enter your NUID below</span></h2>
 		</div>
-		<unl-progress indeterminate ng-show="loadingContent" class="animate-fade margin-bottom"></unl-progress>
-		<form name="boardSigninForm" novalidate>
-			<unl-input floatingLabel label="Enter your NUID">
-				<input is="core-input" autofocus required ng-model="kioskNuid" type="password" pattern="[0-9]*" name="kiosk-nuid">
-			</unl-input>
-			<button ng-hide="processData.authUser" class="button-block animate-fade-right margin-top" ng-click="validateAndGet(kioskNuid)" ng-disabled="boardSigninForm.kiosk-nuid.$invalid">Sign In</button>
+		<unl-progress indeterminate ng-show="processData.loadingContent" class="animate-fade margin-bottom"></unl-progress>
+		<form name="boardSigninForm">
+			<div horizontal layout ng-hide="processData.authUser">
+				<input start flex placeholder="NUID" autofocus required ng-model="processData.kioskNuid" type="password" pattern="[0-9]*" name="kiosk-nuid">
+				<button ng-click="validateAndGet()" ng-disabled="boardSigninForm.kiosk-nuid.$invalid">Sign In</button>
+			</div>
 			<div ng-show="processData.authUser" class="animate-fade-left">
-				<unl-input floatingLabel label="Name">
-					<input is="core-input" value="{{processData.authUser.first_name}} {{processData.authUser.last_name}}" type="text" name="kiosk-name">
-				</unl-input>
-				<unl-input floatingLabel label="Email">
-					<input is="core-input" ng-model="processData.authUser.email" type="email" name="kiosk-email" required>
-				</unl-input>
-				<button class="button-block margin-top" ng-disabled="boardSigninForm.$invalid" ng-click="go('/{{groupId}}/kiosk/message')">Continue to messaging {{processData.selectedUser.first_name}}</button>
+				<div horizontal layout>
+					<input flex six placeholder="First Name" ng-model="processData.authUser.first_name" type="text" name="kiosk-first-name">
+					<input flex six placeholder="Last Name" type="text" ng-model="processData.authUser.last_name" name="kiosk-last-name">
+				</div>
+				<input placeholder="Email" ng-model="processData.authUser.email" type="email" name="kiosk-email" required>
+				<button class="button-block" ng-disabled="boardSigninForm.$invalid" ng-click="go('/{{groupId}}/kiosk/message')">Continue to messaging {{processData.selectedUser.first_name}}</button>
 			</div>
 		</form>
+		<button class="button-clear button-block" ng-click="startOver()">Start Over</button>
 	</div>
 </div>

@@ -20,5 +20,7 @@ angular.module('hyenaWelcomeApp')
   	//Get Assets and Services
     if(groupId) {
       $scope.locations = LocationService.groupLocations(groupId, 10).$asArray();
+      var group = FirebaseGroupService.get(groupId).$asObject();
+      group.$bindTo($scope, 'group');
     }
   });
